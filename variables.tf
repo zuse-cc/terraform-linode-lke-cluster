@@ -13,14 +13,20 @@ variable "service" {
   type        = string
 }
 
-variable "versioning" {
-  description = "Enable versioning for the bucket"
-  type = object({
-    enabled           = bool
-    access_key_id     = optional(string)
-    secret_access_key = optional(string)
-  })
-  default = {
-    enabled = false
-  }
+variable "k8s_version" {
+  description = "Kubernetes version for the cluster"
+  type        = string
+  default     = "1.34"
+}
+
+variable "worker_pool_type" {
+  description = "Linode instance type for worker nodes"
+  type        = string
+  default     = "g6-standard-2"
+}
+
+variable "worker_pool_count" {
+  description = "Number of worker nodes in the pool"
+  type        = number
+  default     = 3
 }
