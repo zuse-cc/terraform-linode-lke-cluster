@@ -30,3 +30,13 @@ variable "worker_pool_count" {
   type        = number
   default     = 3
 }
+
+variable "control_plane_acl" {
+  description = "Control plane ACL configuration"
+  default     = null
+
+  type = object({
+    ipv4 = optional(list(string), [])
+    ipv6 = optional(list(string), [])
+  })
+}

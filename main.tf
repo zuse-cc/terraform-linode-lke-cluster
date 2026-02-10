@@ -19,4 +19,17 @@ resource "linode_lke_cluster" "k" {
     type  = var.worker_pool_type
     count = var.worker_pool_count
   }
+
+  control_plane {
+    dynamic "acl" {
+      for_each = var.control_plane_acl != null ? [1] : []
+      content {
+        enabled = true
+        addresses {
+          ipv4 = var.control_plane_acl.ipv4
+          ipv6 = var.control_plane_acl.ipv6
+        }
+      }
+    }
+  }
 }
