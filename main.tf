@@ -1,6 +1,6 @@
 locals {
   label = "${var.stage}-${var.service}-${random_string.s.result}"
-  tags  = ["stage:${var.stage}", "service:${var.service}", "component:backups"]
+  tags  = ["stage:${var.stage}", "service:${var.service}"]
 }
 
 resource "random_string" "s" {
@@ -9,13 +9,27 @@ resource "random_string" "s" {
   upper   = false
 }
 
-resource "linode_object_storage_bucket" "b" {
-  region = var.region
-  label  = local.label
+resource "linode_lke_cluster" "k" {
+  label       = local.label
+  k8s_version = var.k8s_version
+  region      = var.region
+  tags        = local.tags
 
-  access_key = var.versioning.enabled ? var.versioning.access_key_id : null
-  secret_key = var.versioning.enabled ? var.versioning.secret_access_key : null
+  pool {
+    type  = var.worker_pool_type
+    count = var.worker_pool_count
+  }
 
-  versioning = var.versioning.enabled
-  acl        = "private"
+  control_plane {
+    dynamic "acl" {
+      for_each = var.control_plane_acl != null ? [1] : []
+      content {
+        enabled = true
+        addresses {
+          ipv4 = var.control_plane_acl.ipv4
+          ipv6 = var.control_plane_acl.ipv6
+        }
+      }
+    }
+  }
 }
