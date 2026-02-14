@@ -31,6 +31,11 @@ variable "worker_pool_count" {
   default     = 3
 }
 
+variable "parent_domain" {
+  description = "Linode domain to use as parent for the cluster domain"
+  type        = string
+}
+
 variable "control_plane_acl" {
   description = "Control plane ACL configuration"
   default     = null
@@ -38,5 +43,12 @@ variable "control_plane_acl" {
   type = object({
     ipv4 = optional(list(string), [])
     ipv6 = optional(list(string), [])
+  })
+}
+
+variable "infisical" {
+  type = object({
+    project_id  = string
+    environment = string
   })
 }

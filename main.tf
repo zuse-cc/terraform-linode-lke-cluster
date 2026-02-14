@@ -1,6 +1,8 @@
 locals {
-  label = "${var.stage}-${var.service}-${random_string.s.result}"
+  name  = "${var.service}-${random_string.s.result}"
+  label = "${var.stage}-${local.name}"
   tags  = ["stage:${var.stage}", "service:${var.service}"]
+  fqdn  = "${local.name}.${var.parent_domain}"
 }
 
 resource "random_string" "s" {
