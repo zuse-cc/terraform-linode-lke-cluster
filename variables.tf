@@ -19,6 +19,12 @@ variable "k8s_version" {
   default     = "1.34"
 }
 
+variable "k8s_enabled" {
+  description = "Create the Kubernetes cluster or not, if disabled, only the secrets and other supporting infra will be created"
+  type        = bool
+  default     = true
+}
+
 variable "worker_pool_type" {
   description = "Linode instance type for worker nodes"
   type        = string

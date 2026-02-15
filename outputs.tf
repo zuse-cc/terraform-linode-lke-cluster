@@ -1,27 +1,27 @@
 output "cluster_id" {
-  value = linode_lke_cluster.k.id
+  value = var.k8s_enabled ? linode_lke_cluster.k[0].id : null
 }
 
 output "cluster_status" {
-  value = linode_lke_cluster.k.status
+  value = var.k8s_enabled ? linode_lke_cluster.k[0].status : null
 }
 
 output "cluster_name" {
-  value = linode_lke_cluster.k.label
+  value = var.k8s_enabled ? linode_lke_cluster.k[0].label : null
 }
 
 output "kubeconfig" {
   sensitive = true
-  value     = linode_lke_cluster.k.kubeconfig
+  value     = var.k8s_enabled ? linode_lke_cluster.k[0].kubeconfig : null
 }
 
 output "api_endpoints" {
-  value = linode_lke_cluster.k.api_endpoints
+  value = var.k8s_enabled ? linode_lke_cluster.k[0].api_endpoints : null
 }
 
 output "label" {
   description = "Generated label for the cluster"
-  value       = linode_lke_cluster.k.label
+  value       = var.k8s_enabled ? linode_lke_cluster.k[0].label : null
 }
 
 output "fqdn" {
@@ -39,4 +39,8 @@ output "domain_name" {
 
 output "domain_id" {
   value = module.cluster_domain.domain_id
+}
+
+output "infisical_secrets_path" {
+  value = infisical_secret_folder.cluster.path
 }
