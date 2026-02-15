@@ -1,7 +1,3 @@
-data "linode_domain" "parent" {
-  domain = var.parent_domain
-}
-
 module "cluster_domain" {
   source  = "https://github.com/zuse-cc/terraform-linode-domain/releases/download/v0.1.0-rc1/terraform-linode-domain.tar.gz"
   env     = var.stage
@@ -9,7 +5,7 @@ module "cluster_domain" {
   tld     = local.fqdn
 
   parent = {
-    domain_id = data.linode_domain.parent.id
+    domain_id = var.parent_domain.id
   }
 }
 

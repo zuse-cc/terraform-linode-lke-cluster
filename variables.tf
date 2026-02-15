@@ -33,7 +33,10 @@ variable "worker_pool_count" {
 
 variable "parent_domain" {
   description = "Linode domain to use as parent for the cluster domain"
-  type        = string
+  type = object({
+    name = string
+    id   = string
+  })
 }
 
 variable "control_plane_acl" {
