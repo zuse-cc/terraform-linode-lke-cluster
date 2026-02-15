@@ -12,6 +12,8 @@ resource "random_string" "s" {
 }
 
 resource "linode_lke_cluster" "k" {
+  count = var.k8s_enabled ? 1 : 0
+
   label       = local.label
   k8s_version = var.k8s_version
   region      = var.region

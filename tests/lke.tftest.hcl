@@ -20,7 +20,7 @@ variables {
 
 run "generates_label" {
   assert {
-    condition     = startswith(linode_lke_cluster.k.label, "${var.stage}-${var.service}")
+    condition     = startswith(linode_lke_cluster.k[0].label, "${var.stage}-${var.service}")
     error_message = "incorrect cluster label"
   }
 }
@@ -33,12 +33,12 @@ run "set_ip_for_control_plane_acl" {
   }
 
   assert {
-    condition     = linode_lke_cluster.k.control_plane[0].acl[0].enabled == true
+    condition     = linode_lke_cluster.k[0].control_plane[0].acl[0].enabled == true
     error_message = "control plane ACL should be enabled"
   }
 
   assert {
-    condition     = contains(linode_lke_cluster.k.control_plane[0].acl[0].addresses[0].ipv4, "1.2.3.4/32")
+    condition     = contains(linode_lke_cluster.k[0].control_plane[0].acl[0].addresses[0].ipv4, "1.2.3.4/32")
     error_message = "control plane ACL should allowlist 1.2.3.4/32"
   }
 }
@@ -49,7 +49,18 @@ run "no_control_plane_acl" {
   }
 
   assert {
-    condition     = length(linode_lke_cluster.k.control_plane[0].acl) == 0
+    condition     = length(linode_lke_cluster.k[0].control_plane[0].acl) == 0
     error_message = "control plane ACL should not be configured"
+  }
+}
+
+run "cluster_disabled" {
+  variables {
+    k8s_enabled = false
+  }
+
+  assert {
+    condition     = length(linode_lke_cluster.k) == 0
+    error_message = "cluster should not be created when k8s_enabled is false"
   }
 }
