@@ -1,9 +1,21 @@
 mock_provider "linode" {}
 
+mock_provider "infisical" {}
+
 variables {
   stage   = "tst"
   service = "lke-test"
   region  = "eu-central"
+
+  parent_domain = {
+    name = "cluster.local"
+    id   = 123
+  }
+
+  infisical = {
+    project_id  = "abc123"
+    environment = "tst"
+  }
 }
 
 run "generates_label" {
