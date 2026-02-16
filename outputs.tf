@@ -55,6 +55,7 @@ output "infisical_auth" {
 
 output "kubernetes" {
   description = "Kubernetes connection details"
+  sensitive   = true
 
   value = var.k8s_enabled ? {
     host       = local.kubeconfig.clusters[0].cluster.server
