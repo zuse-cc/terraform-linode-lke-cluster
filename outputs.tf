@@ -44,3 +44,11 @@ output "domain_id" {
 output "infisical_secrets_path" {
   value = infisical_secret_folder.cluster.path
 }
+
+output "infisical_auth" {
+  sensitive = true
+  value = {
+    client_id     = module.infisical_id.client_id
+    client_secret = module.infisical_id.client_secret
+  }
+}
