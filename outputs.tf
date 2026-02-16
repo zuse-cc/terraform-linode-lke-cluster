@@ -52,3 +52,14 @@ output "infisical_auth" {
     client_secret = module.infisical_id.client_secret
   }
 }
+
+output "kubernetes" {
+  description = "Kubernetes connection details"
+  sensitive   = true
+
+  value = var.k8s_enabled ? {
+    host       = local.kubeconfig.clusters[0].cluster.server
+    token      = local.kubeconfig.users[0].user.token
+    cluster_ca = base64decode(local.kubeconfig.clusters[0].cluster.certificate-authority-data)
+  } : null
+}
