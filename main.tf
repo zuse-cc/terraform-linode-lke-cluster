@@ -1,8 +1,9 @@
 locals {
-  name  = "${var.service}-${random_string.s.result}"
-  label = "${var.stage}-${local.name}"
-  tags  = ["stage:${var.stage}", "service:${var.service}"]
-  fqdn  = "${local.name}.${var.parent_domain.name}"
+  name       = "${var.service}-${random_string.s.result}"
+  label      = "${var.stage}-${local.name}"
+  tags       = ["stage:${var.stage}", "service:${var.service}"]
+  fqdn       = "${local.name}.${var.parent_domain.name}"
+  kubeconfig = var.k8s_enabled ? yamldecode(base64decode(linode_lke_cluster.k[0].kubeconfig)) : null
 }
 
 resource "random_string" "s" {
