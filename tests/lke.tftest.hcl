@@ -6,6 +6,8 @@ mock_provider "linode" {
   }
 }
 
+mock_provider "grafana" {}
+
 mock_provider "infisical" {}
 
 variables {
@@ -21,6 +23,10 @@ variables {
   infisical = {
     project_id  = "abc123"
     environment = "tst"
+  }
+
+  grafana = {
+    stack = "foo"
   }
 }
 
