@@ -61,3 +61,10 @@ variable "infisical" {
     environment = string
   })
 }
+
+variable "grafana" {
+  description = "Settings for Grafana cloud provisioning"
+  type = object({
+    stack = string
+  })
+}

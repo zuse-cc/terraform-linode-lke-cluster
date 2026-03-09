@@ -4,7 +4,10 @@ terraform {
       source  = "linode/linode"
       version = "~> 3.0"
     }
-
+    grafana = {
+      source  = "grafana/grafana"
+      version = "~> 4.0"
+    }
     infisical = {
       source  = "infisical/infisical"
       version = "~> 0.16"
