@@ -32,7 +32,7 @@ resource "infisical_secret" "gcloud_secret" {
 module "infisical_id" {
   source  = "https://github.com/zuse-cc/terraform-infisical-machine-id/releases/download/v0.2.0-beta/terraform-infisical-machine-id.tar.gz"
   stage   = "dev"
-  service = "${local.label}-esm"
+  service = "${local.name}-esm"
   org_id  = data.infisical_identity_details.current.organization.id
 
   projects = [
