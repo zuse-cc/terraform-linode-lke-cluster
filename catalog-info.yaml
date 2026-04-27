@@ -20,4 +20,4 @@
       type: library
       lifecycle: stable
       owner: infra-team
-      system: cluster-bootstrap
+      system: runtime-platform
