@@ -5,7 +5,7 @@
       description: Terraform module to deploy Linode LKE clusters
       labels:
         zuse.cc/lifecycle-stage: beta
-        zuse-cc/terraforge/provider: linode
+        zuse-cc/terraforge-provider: linode
       annotations:
         github.com/project-slug: zuse-cc/terraform-linode-lke-cluster
       tags:
