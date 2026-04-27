@@ -1,0 +1,23 @@
+    apiVersion: backstage.io/v1alpha1
+    kind: Component
+    metadata:
+      name: terraform-linode-lke-cluster
+      description: Terraform module to deploy Linode LKE clusters
+      labels:
+        zuse.cc/lifecycle-stage: beta
+      annotations:
+        github.com/project-slug: zuse-cc/terraform-linode-lke-cluster
+        zuse-cc/terraforge/provider: linode
+      tags:
+        - terraform
+        - kubernetes
+        - linode
+      links:
+        - url: https://github.com/joerx/terraform-linode-lke-cluster/releases
+          title: Releases
+          icon: storage
+    spec:
+      type: library
+      lifecycle: stable
+      owner: infra-team
+      system: cluster-bootstrap
